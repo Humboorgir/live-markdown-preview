@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import remarkBreaks from "remark-breaks";
 
 type MarkdownPreviewProps = {
   children?: string;
@@ -12,6 +13,7 @@ const MarkdownPreview = ({ children, className }: MarkdownPreviewProps) => {
   return (
     <ReactMarkdown
       className={className}
+      remarkPlugins={[remarkBreaks]}
       components={{
         code({ className, children, ...rest }) {
           const match = /language-(\w+)/.exec(className || "");
