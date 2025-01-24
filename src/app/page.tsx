@@ -14,18 +14,30 @@ export default function Home() {
   }
 
   return (
-    <Container className="prose prose-invert h-screen w-screen !px-0 py-20 flex flex-col items-center">
+    <Container className="prose prose-invert h-screen min-h-[1px] w-screen !px-0 py-20 flex flex-col items-center">
       {/* TODO: diplay an illustration if nothing is typed (like a resting animal or sth like that) */}
-      {/* TODO: make tabs for markdown preview */}
 
-      {/* <MarkdownPreview className="p-10 border-2 border-white/5 w-full h-full mb-8">{content}</MarkdownPreview>
+      <Tabs className="w-full" openByDefault="markdown">
+        <TabsList>
+          <TabsTrigger value="markdown">Preview</TabsTrigger>
+          <TabsTrigger value="preview">Markdown</TabsTrigger>
+        </TabsList>
 
-      <TextArea
-        containerClassName="w-full"
-        className="w-full"
-        placeholder="Markdown"
-        onChange={updateContent}
-      /> */}
+        <TabsContent className="min-h-[600px]" value="markdown">
+          <TextArea
+            className="w-full h-full absolute resize-y"
+            placeholder="Start typing to get started."
+            value={content}
+            onChange={updateContent}
+          />
+        </TabsContent>
+
+        <TabsContent value="preview">
+          <MarkdownPreview className="absolute p-10 border border-ring w-full min-h-full mb-8">
+            {content}
+          </MarkdownPreview>
+        </TabsContent>
+      </Tabs>
     </Container>
   );
 }

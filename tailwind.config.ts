@@ -9,8 +9,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        foreground: {
+          DEFAULT: "hsl(var(--foreground))",
+          light: "hsl(var(--foreground-light))",
+          muted: "hsl(var(--foreground-muted))",
+        },
+        background: "hsl(var(--background))",
+        primary: "hsl(var(--primary))",
+        secondary: "hsl(var(--secondary))",
+        accent: "hsl(var(--accent))",
+        ring: "hsl(var(--ring))",
+      },
+      animation: {
+        ripple: "ripple 500ms linear",
+      },
+      keyframes: {
+        ripple: {
+          "0%": { opacity: "40%", transform: "scale(0)" },
+          "100%": { opacity: "0%", transform: "scale(3)" },
+        },
       },
     },
   },
