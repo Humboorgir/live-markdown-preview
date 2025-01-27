@@ -6,20 +6,46 @@ import TextArea from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs/tabs";
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
+import Select from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   const [content, setContent] = useState("");
-
+  const [textSize, setTextSize] = useState("");
   function updateContent(e: ChangeEvent<HTMLTextAreaElement>) {
     setContent(e.target.value);
   }
 
+  function updateTextSize(option: { name: string; value: string }) {
+    setTextSize(option.value);
+  }
+
   return (
-    <Container className="prose prose-invert prose-sm md:prose-base h-screen min-h-[1px] w-screen !px-2 py-20 flex flex-col items-center">
+    <Container
+      className={cn(
+        "prose prose-invert prose-sm md:prose-base h-screen min-h-[1px] w-screen !px-3 md:!px-6 py-20 flex flex-col items-center",
+        textSize == "small" && "!prose-sm",
+        textSize == "medium" && "!prose-base",
+        textSize == "large" && "!prose-lg",
+        textSize == "extra-large" && "!prose-xl"
+      )}>
       <Tabs className="w-full" openByDefault="markdown">
         <TabsList>
           <TabsTrigger value="markdown">Markdown</TabsTrigger>
           <TabsTrigger value="preview">Preview</TabsTrigger>
+
+          <Select
+            options={[
+              { name: "Small", value: "small" },
+              { name: "Medium", value: "medium" },
+              { name: "Large", value: "large" },
+              { name: "Extra Large", value: "extra-large" },
+            ]}
+            onChange={updateTextSize}
+            className="!ml-auto"
+            variant="outline">
+            Text size
+          </Select>
         </TabsList>
 
         <TabsContent className="min-h-[600px]" value="markdown">

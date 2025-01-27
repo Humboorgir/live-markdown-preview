@@ -1,5 +1,3 @@
-// TODO: implement color variant
-
 import * as React from "react";
 import Link from "next/link";
 
@@ -42,10 +40,6 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, children, rippleColor, href, ...props }, ref) => {
-    // use secondary itself as the rippleColor if variant == secondary and rippleColor
-    // isn't specified
-    if (variant == "secondary" && !rippleColor) rippleColor = "#7C72FF";
-
     const Component = href ? Link : "button";
     return (
       <Component
