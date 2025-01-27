@@ -5,6 +5,7 @@ import MarkdownPreview from "@/components/ui/markdown-preview/markdown-preview";
 import TextArea from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs/tabs";
 import { ChangeEvent, useState } from "react";
+import Image from "next/image";
 
 export default function Home() {
   const [content, setContent] = useState("");
@@ -14,13 +15,11 @@ export default function Home() {
   }
 
   return (
-    <Container className="prose prose-invert h-screen min-h-[1px] w-screen !px-0 py-20 flex flex-col items-center">
-      {/* TODO: diplay an illustration if nothing is typed (like a resting animal or sth like that) */}
-
+    <Container className="prose prose-invert prose-sm md:prose-base h-screen min-h-[1px] w-screen !px-2 py-20 flex flex-col items-center">
       <Tabs className="w-full" openByDefault="markdown">
         <TabsList>
-          <TabsTrigger value="markdown">Preview</TabsTrigger>
-          <TabsTrigger value="preview">Markdown</TabsTrigger>
+          <TabsTrigger value="markdown">Markdown</TabsTrigger>
+          <TabsTrigger value="preview">Preview</TabsTrigger>
         </TabsList>
 
         <TabsContent className="min-h-[600px]" value="markdown">
@@ -33,9 +32,16 @@ export default function Home() {
         </TabsContent>
 
         <TabsContent value="preview">
-          <MarkdownPreview className="absolute p-10 border border-ring w-full min-h-full mb-8">
-            {content}
-          </MarkdownPreview>
+          {content ? (
+            <MarkdownPreview className="border border-ring rounded-md absolute px-6 w-full min-h-full mb-8">
+              {content}
+            </MarkdownPreview>
+          ) : (
+            <div className="px-2 text-center absolute border border-ring rounded-md w-full min-h-full flex flex-col items-center">
+              <h2 className="text-2xl md:text-3xl md:mb-3.5">Oops, nothing to show you here!</h2>
+              <p className="text-foreground-muted/80">Type something in 'Markdown' to get started</p>
+            </div>
+          )}
         </TabsContent>
       </Tabs>
     </Container>
