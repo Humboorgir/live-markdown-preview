@@ -5,13 +5,20 @@ import MarkdownPreview from "@/components/ui/markdown-preview/markdown-preview";
 import TextArea from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs/tabs";
 import { ChangeEvent, useState } from "react";
-import Image from "next/image";
 import Select from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
   const [content, setContent] = useState("");
   const [textSize, setTextSize] = useState("");
+
+  const textSizeOptions = [
+    { name: "Small", value: "small" },
+    { name: "Medium", value: "medium" },
+    { name: "Large", value: "large" },
+    { name: "Extra Large", value: "extra-large" },
+  ];
+
   function updateContent(e: ChangeEvent<HTMLTextAreaElement>) {
     setContent(e.target.value);
   }
@@ -34,16 +41,7 @@ export default function Home() {
           <TabsTrigger value="markdown">Markdown</TabsTrigger>
           <TabsTrigger value="preview">Preview</TabsTrigger>
 
-          <Select
-            options={[
-              { name: "Small", value: "small" },
-              { name: "Medium", value: "medium" },
-              { name: "Large", value: "large" },
-              { name: "Extra Large", value: "extra-large" },
-            ]}
-            onChange={updateTextSize}
-            className="!ml-auto"
-            variant="outline">
+          <Select options={textSizeOptions} onChange={updateTextSize} className="!ml-auto" variant="outline">
             Text size
           </Select>
         </TabsList>
