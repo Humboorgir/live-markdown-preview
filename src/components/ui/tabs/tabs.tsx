@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext, useState, createContext, memo, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import Button from "@/components/ui/button";
