@@ -100,15 +100,14 @@ export const TabsContent = ({ children, className, value, ...props }: TabsConten
   const prevSelectedTabIndex = tabs.findIndex((tab) => tab.value == prevSelected);
   const currentTabIndex = tabs.findIndex((tab) => tab.value == value);
   // Directional aware transition
-  const initialX = currentTabIndex > prevSelectedTabIndex ? 30 : -30;
-  const easeOut = [0, 0, 0.2, 1];
+  const initialX = currentTabIndex > prevSelectedTabIndex ? 20 : -20;
 
   return (
     selected == value && (
       <motion.div
         initial={{ opacity: 0, x: initialX }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.25, ease: easeOut }}
+        transition={{ duration: 0.2, ease: [0, 0, 0.2, 1] }}
         className={cn("absolute w-full min-h-[340px] left-0 top-full mt-2", className)}
         {...props}>
         {children}
